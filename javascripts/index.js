@@ -1,30 +1,33 @@
 let buzztokenAddress = '0x5d4dba9e47209a1a9ad2e0a7f8337c19aa8f0397';
 let votingAddress = '0xbaec468fdac3e57ddc5b210d05f7690a095209bf';
 
-$(document).ready(() => {
-    console.log('Ready!');
-    window.addEventListener('load', function() {
+window.addEventListener('load', function() {
 
-        // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-        if (typeof web3 !== 'undefined') {
-            // Use Mist/MetaMask's provider
-            web3js = new Web3(web3.currentProvider);
-        } else {
-            console.log('No web3? You should consider trying MetaMask!');
-            // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-            alert('No Web3 Detected!\n' +
-                'No web3? You should consider trying MetaMask!');
-            web3js = new Web3();
-        }
+    // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+    // console.log(typeof web3);
+    if (typeof web3 !== 'undefined') {
+        // Use Mist/MetaMask's provider
+        web3js = new Web3(web3.currentProvider);
 
+        // Check that we're on testnet
         if (web3js.version.network !== '4') {
             alert('Please switch your ethereum provider to the Rinkeby Test Network!');
         }
+    } else {
+        console.log('No web3? You should consider trying MetaMask!');
+        // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+        alert('No Web3 Detected!\n' +
+            'You should consider using MetaMask!');
+        web3js = new Web3();
+    }
 
-        // Now you can start your app & access web3 freely:
-        startApp();
-    });
+    // Now you can start your app & access web3 freely:
+    startApp();
 });
+
+/* $(document).ready(() => {
+    console.log('Ready!');
+}); */
 
 let buzztokenInstance, votingInstance;
 
