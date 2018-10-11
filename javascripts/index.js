@@ -112,7 +112,7 @@ let updateProposalsView = () => {
           + `<td>${proposals[i].text}</td>`
           + `<td>${proposals[i].votesFor}</td>`
           + `<td>${proposals[i].votesAgainst}</td></tr>`;
-      $('#proposallist').append(row);
+      $('#proposallist').prepend(row);
 
       // Vote Selector
       if (proposals[i].status === 1) {
@@ -136,7 +136,7 @@ let submit = () => {
 
 let vote = () => {
     const voteSelection = Number($('#voteSelection').val());
-    const voteFor = Number(!!($('#voteFor').val()));
+    const voteFor = Number(($('#voteFor').is(':checked')));
     votingInstance.vote.sendTransaction(voteSelection, voteFor,
         {
             from: web3.eth.accounts[0],
