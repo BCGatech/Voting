@@ -1,0 +1,101 @@
+<html>
+
+<head>
+  <title>Express</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+          integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+          crossorigin="anonymous"></script>
+
+  <script src="/javascripts/web3.js"></script>
+  <script src="/javascripts/buzztokenABI.js"></script>
+  <script src="/javascripts/votingABI.js"></script>
+  <script src="/javascripts/index.js"></script>
+</head>
+
+<body style="margin: 0;">
+  <div id="header" class="row">
+    <div class="col-6">
+      <h1>BCGT DAO</h1>
+      <p>Decentralized Proposal Voting Application by<br>
+        Blockchain & Cryptocurrency at Georgia Tech</p>
+    </div>
+    <div class="col-6">
+      <div id="controls" class="card m-2 p-2">
+        <h5>Controls</h5>
+        <div>
+          <div>
+            Web3 Status: <span id="web3status"></span>
+          </div>
+          <div>
+            Wallet Address: <span id="walletaddress"></span>
+          </div>
+          <div>
+            Balance: <span id="walletbalance"></span>
+          </div>
+        </div>
+        <div>
+          <div class="card p-2">
+            <h5>Contracts</h5>
+            <div>
+              BuzzToken: <input type="text" id="buzztokenaddress"/>
+            </div>
+            <div>
+              Voting: <input type="text" id="votingaddress"/>
+            </div>
+            <input type="button" value="update" id="updateContractAddresses">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id=actions" class="row">
+    <div class="col-6">
+      <h3>Submit</h3>
+      <div class="card p-2">
+        <p>
+          Text: <input type="text" id="subText"/>
+        </p>
+        <p>
+          Expiry: <input type="text" id="subExpiry"/>
+        </p>
+        <input type="button" value="Submit" id="subButton"/>
+      </div>
+    </div>
+    <div class="col-6">
+      <h3>Vote</h3>
+      <div class="card p-2">
+        <p>
+          ID: <select id="voteSelection"></select>
+        </p>
+        <p>
+          In Favor: <input type="checkbox" id="voteFor"/>
+        </p>
+        <input type="button" value="Submit" id="voteButton"/>
+      </div>
+    </div>
+  </div>
+  <div id="proposals" class="card m-2 p-2">
+    <h3>Proposals</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Status</th>
+        <th scope="col">Text</th>
+        <th scope="col">VotesFor</th>
+        <th scope="col">VotesAgainst</th>
+      </tr>
+      </thead>
+      <tbody id="proposallist">
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>
