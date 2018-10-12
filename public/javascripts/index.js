@@ -143,7 +143,7 @@ let updateProposals = (callback) => {
 
 let updateProposalsView = () => {
   $('#proposallist').html('');
-  $('#proposallist').html('');
+  $('#voteSelection').html('');
   for (let i = 0; i < proposals.length; i++) {
       // Proposal List
       let row = `<tr><th>${proposals[i].id}</th>`
