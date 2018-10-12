@@ -116,7 +116,7 @@ let startApp = () => {
 let updateProposals = (callback) => {
     // Done with recursive promises since each depends on the previous
     (function loop(i) {
-        if (i < 10) new Promise((resolve, reject) => {
+        new Promise((resolve, reject) => {
             votingInstance.getProposal.call(i, (err, result) => {
                 if(parseFloat(result[0]) === 0) {
                     reject();
