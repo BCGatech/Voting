@@ -7,6 +7,21 @@ window.addEventListener('load', function() {
     // console.log(typeof web3);
     if (typeof web3 !== 'undefined') {
         // Use Mist/MetaMask's provider
+
+        /*
+        NOTE: As of this writing, MetaMask still injects the `Web3()` constructor.
+        This means we can only control the version of web3 API used if we overwrite this constructor,
+        but all the CDN versions of web3.js do not.
+
+        I am serving a modified version of the 0.20.7 web3.js, since it's the only one I could
+        find unminified and thus edit to force overwriting Web3.
+
+        See:
+        https://ethereum.stackexchange.com/questions/48729/bundling-web3js-does-not-seem-to-work-metamask-app
+
+        TODO: Upgrade to web3 API 1.0.0 when an unminified source becomes available
+         */
+
         web3js = new Web3(web3.currentProvider);
 
         // Check that we're on testnet
@@ -50,6 +65,7 @@ const proposalStatus = [{
 }];
 
 let startApp = () => {
+    // Fill in control box data
     $('#buzztokenaddress').val(buzztokenAddress);
     $('#votingaddress').val(votingAddress);
 
@@ -57,16 +73,18 @@ let startApp = () => {
     $('#web3status').text(`${version} ${web3js? '👍': '👎'}`);
     $('#walletaddress').text(`${web3js.eth.accounts[0]}`);
 
+    // Get contract instances we can interact with
     let buzztokenContract = web3js.eth.contract(buzztokenABI);
-    let buzztokenInstance = buzztokenContract.at(buzztokenAddress);
-    votingContract = web3js.eth.contract(votingABI);
+    buzztokenInstance = buzztokenContract.at(buzztokenAddress);
+    let votingContract = web3js.eth.contract(votingABI);
     votingInstance = votingContract.at(votingAddress);
 
     buzztokenInstance.balanceOf.call(web3.eth.accounts[0], (err, result) => {
         $('#walletbalance').text(`${parseFloat(result)} BUZZ`);
     });
 
-    updateProposals((err, result, index, resolve) => {
+    // Get the list of proposals once on start
+    updateProposals();/*(err, result, index, resolve) => {
         let proposal = {
             id: index,
             status: parseFloat(result[0]),
@@ -77,10 +95,22 @@ let startApp = () => {
         };
         proposals[index] = proposal;
         resolve();
-    });
+    });*/
 
+    // Hook up action buttons
     $('#subButton').click(submit);
     $('#voteButton').click(vote);
+
+    // Watch for contract events
+    let votingChange = web3js.eth.filter({
+        address: votingAddress,
+        toBlock: 'latest'
+    });
+
+    votingChange.watch((err, result) => {
+       updateProposals() ;
+       console.log(result);
+    });
 };
 
 let updateProposals = (callback) => {
@@ -91,7 +121,17 @@ let updateProposals = (callback) => {
                 if(parseFloat(result[0]) === 0) {
                     reject();
                 } else {
-                    callback(null, result, i, resolve);
+                    let proposal = {
+                        id: i,
+                        status: parseFloat(result[0]),
+                        text: result[1],
+                        expiry: parseFloat(result[2]),
+                        votesFor: parseFloat(result[3]),
+                        votesAgainst: parseFloat(result[4])
+                    };
+                    proposals[i] = proposal;
+                    resolve();
+                    //callback(null, result, i, resolve);
                 }
             });
         }).then(loop.bind(null, i+1)).catch((err) => {
