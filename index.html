@@ -20,86 +20,82 @@
   <script src="javascripts/buzztokenABI.js"></script>
   <script src="javascripts/votingABI.js"></script>
   <script src="javascripts/index.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body style="margin: 0;">
   <div id="header" class="row">
-    <div class="col-6 text-center">
+    <div class="col-lg-6 text-center">
       <img src="images/logo.png" width="100"/>
       <h1>BCGT Voting Đapp</h1>
       <p>Decentralized Proposal Voting Application by<br>
-        Blockchain & Cryptocurrency at Georgia Tech</p>
+        <a href="https://bcgatech.github.io">
+          Blockchain & Cryptocurrency at Georgia Tech
+        </a></p>
     </div>
-    <div class="col-6">
+    <div class="col-lg-6">
       <div id="controls" class="card m-2 p-2">
         <h5>Control</h5>
         <div>
-          <div>
-            Web3 Status: <span id="web3status"></span>
-          </div>
-          <div>
-            Wallet Address: <span id="walletaddress"></span>
-          </div>
-          <div>
+          <p>
+            Web3 Status: <span id="web3status"></span><br>
+            Wallet Address: <span id="walletaddress"></span><br>
             Balance: <span id="walletbalance"></span>
-          </div>
+          </p>
         </div>
         <div>
           <div class="card p-2">
             <h5>Contracts</h5>
-            <div>
-              BuzzToken: <input type="text" id="buzztokenaddress"/>
-            </div>
-            <div>
+            <p>
+              BuzzToken: <input type="text" id="buzztokenaddress"/><br>
               Voting: <input type="text" id="votingaddress"/>
-            </div>
-            <input type="button" value="update" id="updateContractAddresses">
+            </p>
+            <!--input type="button" value="Update" id="updateContractAddresses"-->
           </div>
         </div>
       </div>
     </div>
   </div>
   <div id=actions" class="row">
-    <div class="col-6">
+    <div class="col-lg-6">
       <div class="card m-2 p-2">
         <h5>Submit</h5>
         <p>
-          Text: <input type="text" id="subText"/>
-        </p>
-        <p>
+          Text: <input type="text" id="subText"/><br><br>
           Expires at Block #: <input type="text" id="subExpiry"/>
         </p>
         <input type="button" value="Submit" id="subButton"/>
       </div>
     </div>
-    <div class="col-6">
+    <div class="col-lg-6">
       <div class="card m-2 p-2">
         <h5>Vote</h5>
         <p>
-          ID: <select id="voteSelection"></select>
+          ID: <select id="voteSelection"></select><br><br>
+          In Favor: <input type="checkbox" id="voteFor"/><!--label for="voteFor"></label-->
         </p>
-        <p>
-          In Favor: <input type="checkbox" id="voteFor"/>
-        </p>
-        <input type="button" value="Submit" id="voteButton"/>
+        <input type="button" value="Vote" id="voteButton"/>
       </div>
     </div>
   </div>
   <div id="proposals" class="card m-2 p-2">
     <h5>Proposals</h5>
-    <table class="table">
-      <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Status</th>
-        <th scope="col">Text</th>
-        <th scope="col">VotesFor</th>
-        <th scope="col">VotesAgainst</th>
-      </tr>
-      </thead>
-      <tbody id="proposallist">
-      </tbody>
-    </table>
+    <div class="table-responsive-lg">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Status</th>
+          <th scope="col">Text</th>
+          <th scope="col">VotesFor</th>
+          <th scope="col">VotesAgainst</th>
+        </tr>
+        </thead>
+        <tbody id="proposallist">
+        </tbody>
+      </table>
+    </div>
   </div>
 </body>
 

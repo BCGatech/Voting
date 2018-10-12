@@ -1,8 +1,73 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Segoe UI", "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+input[type="button"] {
+  border: none;
+  border-radius: 8px;
+  background-color: #dadee1;
+  color: #6370ca;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 10px 0 10px 0;
+  outline: none;
+}
+input[type="button"]:hover {
+  background-color: #d0d4d7;
+}
+input[type="button"]:active {
+  background-color: #b9b9b9;
+  color: #455d9b;
+}
+
+input[type="text"] {
+  border: none;
+  border-radius: 8px;
+  background-color: #f3f7fa;
+  color: #6370ca;
+  padding: 5px 10px 5px 10px;
+}
+
+
+input[type="text"]:focus {
+  background-color: #e9edf0;
+  outline: none;
+  caret-color: white;
+}
+
+
+/* input[type="checkbox"] {
+  position: absolute;
+  visibility: hidden;
+}
+input[type="checkbox"] + label {
+  border: 2px solid #ccc;
+  border-radius: 25%;
+  cursor: pointer;
+  height: 14px;
+  width: 14px;
+  display: inline-flex;
+}
+input[type="checkbox"]:checked + label {
+  background-color: #66bb6a;
+  line-height: unset;
+} */
+
+select {
+  background: #dadee1;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+}
+
+select:focus {
+  background-color: #d0d4d7;
+  outline: none;
+  caret-color: white;
 }
