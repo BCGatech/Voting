@@ -136,5 +136,27 @@ const votingABI = [
         ],
         "name": "Failed",
         "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "name": "voter",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "name": "inFavor",
+                "type": "bool"
+            }
+        ],
+        "name": "Voted",
+        "type": "event"
     }
 ];
