@@ -1,5 +1,5 @@
 let buzztokenAddress = '0x5d4dba9e47209a1a9ad2e0a7f8337c19aa8f0397';
-let votingAddress = '0xbaec468fdac3e57ddc5b210d05f7690a095209bf';
+let votingAddress = '0xe2749E7bc8ed81BE5a8eAbb619cF8271e00d84AC';
 
 window.addEventListener('load', function() {
 
@@ -79,7 +79,7 @@ let startApp = () => {
     let votingContract = web3js.eth.contract(votingABI);
     votingInstance = votingContract.at(votingAddress);
 
-    buzztokenInstance.balanceOf.call(web3.eth.accounts[0], (err, result) => {
+    buzztokenInstance.balanceOf.call(web3js.eth.accounts[0], (err, result) => {
         $('#walletbalance').text(`${parseFloat(result)} BUZZ`);
     });
 
@@ -167,7 +167,7 @@ let submit = () => {
     const subExpiry = Number($('#subExpiry').val());
     votingInstance.submit.sendTransaction(subText, subExpiry,
         {
-            from: web3.eth.accounts[0],
+            from: web3js.eth.accounts[0],
             //gas: 3000000
         }, (err, result) => {
         console.log('Submit');
@@ -179,7 +179,7 @@ let vote = () => {
     const voteFor = Number(($('#voteFor').is(':checked')));
     votingInstance.vote.sendTransaction(voteSelection, voteFor,
         {
-            from: web3.eth.accounts[0],
+            from: web3js.eth.accounts[0],
             //gas: 3000000
         }, (err, result) => {
         console.log('Submit');
